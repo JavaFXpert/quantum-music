@@ -243,9 +243,121 @@ LABEL @END-Q21
 
 MELODIC_GATE 2 1 0
 
+MEASURE 2 [44]
+MEASURE 1 [43]
+MEASURE 0 [42]
+
+# ---- Retrieve pitch for Lead Note #2, replicate it into qubits, and produce pitch for Harmony Note #2a ----
+JUMP-UNLESS @RESET-Q5a [5]
+ACTIVE-SET 2 [63]
+JUMP @END-Q5a
+LABEL @RESET-Q5a
+ACTIVE-RESET 2 [63]
+LABEL @END-Q5a 
+
+JUMP-UNLESS @RESET-Q4a [4]
+ACTIVE-SET 1 [63]
+JUMP @END-Q4a
+LABEL @RESET-Q4a
+ACTIVE-RESET 1 [63]
+LABEL @END-Q4a 
+
+JUMP-UNLESS @RESET-Q3a [3]
+ACTIVE-SET 0 [63]
+JUMP @END-Q3a
+LABEL @RESET-Q3a
+ACTIVE-RESET 0 [63]
+LABEL @END-Q3a 
+
+HARMONIC_GATE 2 1 0
+
 MEASURE 2 [26]
 MEASURE 1 [25]
 MEASURE 0 [24]
+
+# ---- Replicate Harmony Note #2a into qubits, and produce pitch for Harmony Note #2b ----
+JUMP-UNLESS @RESET-Q26 [26]
+ACTIVE-SET 2 [63]
+JUMP @END-Q26
+LABEL @RESET-Q26
+ACTIVE-RESET 2 [63]
+LABEL @END-Q26 
+
+JUMP-UNLESS @RESET-Q25 [25]
+ACTIVE-SET 1 [63]
+JUMP @END-Q25
+LABEL @RESET-Q25
+ACTIVE-RESET 1 [63]
+LABEL @END-Q25 
+
+JUMP-UNLESS @RESET-Q24 [24]
+ACTIVE-SET 0 [63]
+JUMP @END-Q24
+LABEL @RESET-Q24
+ACTIVE-RESET 0 [63]
+LABEL @END-Q24 
+
+MELODIC_GATE 2 1 0
+
+MEASURE 2 [47]
+MEASURE 1 [46]
+MEASURE 0 [45]
+
+# ---- Retrieve pitch for Lead Note #3, replicate it into qubits, and produce pitch for Harmony Note #3a ----
+JUMP-UNLESS @RESET-Q8a [8]
+ACTIVE-SET 2 [63]
+JUMP @END-Q8a
+LABEL @RESET-Q8a
+ACTIVE-RESET 2 [63]
+LABEL @END-Q8a 
+
+JUMP-UNLESS @RESET-Q7a [7]
+ACTIVE-SET 1 [63]
+JUMP @END-Q7a
+LABEL @RESET-Q7a
+ACTIVE-RESET 1 [63]
+LABEL @END-Q7a 
+
+JUMP-UNLESS @RESET-Q6a [6]
+ACTIVE-SET 0 [63]
+JUMP @END-Q6a
+LABEL @RESET-Q6a
+ACTIVE-RESET 0 [63]
+LABEL @END-Q6a 
+
+HARMONIC_GATE 2 1 0
+
+MEASURE 2 [29]
+MEASURE 1 [28]
+MEASURE 0 [27]
+
+# ---- Replicate Harmony Note #3a into qubits, and produce pitch for Harmony Note #3b ----
+JUMP-UNLESS @RESET-Q29 [29]
+ACTIVE-SET 2 [63]
+JUMP @END-Q29
+LABEL @RESET-Q29
+ACTIVE-RESET 2 [63]
+LABEL @END-Q29 
+
+JUMP-UNLESS @RESET-Q28 [28]
+ACTIVE-SET 1 [63]
+JUMP @END-Q28
+LABEL @RESET-Q28
+ACTIVE-RESET 1 [63]
+LABEL @END-Q28 
+
+JUMP-UNLESS @RESET-Q27 [27]
+ACTIVE-SET 0 [63]
+JUMP @END-Q27
+LABEL @RESET-Q27
+ACTIVE-RESET 0 [63]
+LABEL @END-Q27 
+
+MELODIC_GATE 2 1 0
+
+MEASURE 2 [50]
+MEASURE 1 [49]
+MEASURE 0 [48]
 
 """))
 
@@ -254,7 +366,13 @@ print(p)
 
 
 num_runs = 1
-res = qvm.run(p, [2, 1, 0, 5, 4, 3, 8, 7, 6, 11, 10, 9, 14, 13, 12, 17, 16, 15, 20, 19, 18, 23, 22, 21, 26, 25, 24], num_runs)
+res = qvm.run(p, [2, 1, 0,     23, 22, 21,   44, 43, 42,
+                  5, 4, 3,     26, 25, 24,   47, 46, 45,
+                  8, 7, 6,     29, 28, 27,   50, 49, 48,
+                  11, 10, 9,   32, 31, 30,   53, 52, 51,
+                  14, 13, 12,  35, 34, 33,   56, 55, 54,
+                  17, 16, 15,  38, 37, 36,   59, 58, 57,
+                  20, 19, 18,  41, 40, 39,   62, 61, 60], num_runs)
 print(res)
 
 
